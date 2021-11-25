@@ -1,0 +1,139 @@
+html { 
+    background: url("https://lh3.googleusercontent.com/d/1YqkjSadW714piyVpkKu6IeG9uUNN1ZOa") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+    margin: 0px;
+    min-width: 850px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    color: aliceblue;
+    margin: 50px;
+}
+
+.menu ul {
+    display: flex;
+    list-style-type: none;
+}
+
+.menu a {
+    padding: 5px 20px 5px 20px;
+    text-decoration: none;
+    color: aliceblue;
+    font-size: x-large;
+    border-radius: 25px;
+}
+
+.menu a:hover {
+    background-color: dodgerblue;
+}
+
+.products {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    border-top: 1px solid black;
+}
+
+.products ul {
+    list-style-type: none;
+    margin: 10px 0 20px 0;
+    padding-left: 10px;
+}
+
+.type-menu {
+    padding: 20px;
+    min-width: 160px;
+    border-right: 1px solid black;
+}
+
+.sub-menu h4 {
+    margin: 0px;
+}
+
+.sub-menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.type-product h2 {
+    margin: 0px;
+    border-bottom: 1px solid black;
+    padding: 10px;
+    max-width: 100%;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.product {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    height: 300px;
+    max-width: 280px;
+    min-width: 280px;
+    padding: 20px;
+}
+
+.product-img {
+    display: flex;
+    padding: 20px;
+    max-height: 160px;
+    min-height: 160px;
+}
+
+.product-img img {
+    margin: auto;
+    max-height: 140px;
+}
+
+.product-price {
+    color: brown;
+    font-size: x-large;
+    margin-bottom: 10px;
+}
+
+.product-name {
+    font-weight: 700;
+    
+}
+
+@media only screen and (max-width: 1000px) {
+    .header {
+        display: block;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: center;
+    }
+
+    .intro {
+        display: block;
+    }
+
+    .intro-desc {
+        text-align: center;
+    }
+
+    .intro-image {
+        margin-top: 50px;
+    }
+
+    .intro-image img {
+        width: 50%;
+    }
+}
