@@ -63,46 +63,6 @@ class manageModal extends db{
         }
         return $types;
     }
-    public function deleteUserManage($id){
-        $typesql = "DELETE FROM member WHERE member_id=" . $id . ";";
-        $query1 = $this->_query($typesql);
-        return $query1;
-    }
-    public function editUserManage($id,$Name,$Password,$Email,$Phone,$Avatar){
-        if($id != -1){
-            $typesql = "DELETE FROM member WHERE member_id=" . $id . ";";
-            $query = $this->_query($typesql);
-            $typesql1 = "insert into member (member_id,member_name, member_password, member_email, member_phone, member_avatar)
-            values (".$id.",'".$Name."', '".$Password."', '".$Email."', ".$Phone.", '".$Avatar."');";
-            $query1 = $this->_query($typesql1);
-        }else{
-            $typesql1 = "insert into member (member_name, member_password, member_email, member_phone, member_avatar)
-            values ('".$Name."', '".$Password."', '".$Email."', ".$Phone.", '".$Avatar."');";
-            $query1 = $this->_query($typesql1);
-        }
-        return $id;
-    }
-    public function getOrderPaging($page){
-        $skip = (intval($page) - 1) * 5;
-        $skipnext = $skip + 5;
-        if(intval($page) - 1 == 0){
-            $skip = 0;
-            $skipnext = 5;
-        }
-        
-        $typesql = "SELECT * FROM order_product LIMIT ".$skip.", ".$skipnext.";";
-        $query1 = $this->_query($typesql);
-        if(!$query1) return [];
-        $types = [];
-        while ($row = mysqli_fetch_assoc($query1)) {
-            array_push($types, $row);
-        }
-        return $types;
-    }
-    public function deleteOrderManage($id){
-        $typesql = "DELETE FROM order_product WHERE order_id=" . $id . ";";
-        $query1 = $this->_query($typesql);
-        return $query1;
-    }
+    
 }
 ?>
