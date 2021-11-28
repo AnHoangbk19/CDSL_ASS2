@@ -210,6 +210,10 @@ ADD FOREIGN KEY (CustomerID) REFERENCES CUSTOMER (ID);
 CREATE INDEX index_employee
 ON employee (ID, Name, Sex, Salary);
 
+CREATE INDEX index_branch
+ON branch (Name);
+
+
 -- An Value
 INSERT INTO EMPLOYEE VALUE('100000001','Tran Van B','abc1@gmail.com','0903334441','2001-01-02','Nam','104 Thu Duc,TP Ho Chi Minh',6000000,'hoaibaoTV4',1);
 INSERT INTO EMPLOYEE VALUE('100000002','Tran Thi C','abc2@gmail.com','0903334442','2001-01-02','Nu','105 Thu Duc,TP Ho Chi Minh',6000000,'hoaibaoTV4-1',1);
