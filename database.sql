@@ -329,7 +329,7 @@ INSERT INTO `includes` (`Onum`, `Dname`, `Ord_quantity`, `Listed_price`) VALUES
 
 INSERT INTO DISH VALUES ('Ca hoi phi le', 150000);
 INSERT INTO DISH VALUES ('Suon Heo sot chanh day', 210000);
-INSERT INTO DISH VALUES ('Pho cuon Ha Noi', 800000);
+INSERT INTO DISH VALUES ('Pho cuon Ha Noi', 80000);
 
 INSERT INTO BUY_ONLINE VALUES (1, 'minhbaoTV1');
 INSERT INTO BUY_ONLINE VALUES (3, 'ngoctanTV2');
