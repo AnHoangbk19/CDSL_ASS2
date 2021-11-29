@@ -17,16 +17,15 @@ $home_url = getUrl().'/';
 </head>
 <body>
     <div class="container">
-        <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action"><h1>Thành Viên Nhóm</h1></a>
+        <div class="list-group"><h1>Thành Viên Nhóm</h1>
 
         
         <a href="manage/viewBranchAll" class="list-group-item list-group-item-action list-group-item-primary">Nguyễn Minh Bảo</a>
         <a href="dish.php" class="list-group-item list-group-item-action list-group-item-secondary">Phạm Ngọc Tân</a>
         <a href="home/viewEmployeeAll" class="list-group-item list-group-item-action list-group-item-success">Phạm Đại Hoàng An</a>
-        <a href="#" class="list-group-item list-group-item-action list-group-item-danger">#</a>
-        <a href="#" class="list-group-item list-group-item-action list-group-item-warning">#</a>
-        <a href="#" class="list-group-item list-group-item-action list-group-item-info">#</a>
+        <a href="/" class="list-group-item list-group-item-action list-group-item-danger">#</a>
+        <a href="/" class="list-group-item list-group-item-action list-group-item-warning">#</a>
+        <a href="/" class="list-group-item list-group-item-action list-group-item-info">#</a>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
