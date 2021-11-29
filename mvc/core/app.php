@@ -4,8 +4,8 @@ use function PHPSTORM_META\type;
 
 class app{
 
-    protected $controller="demo";
-    protected $action="viewDemo";
+    protected $controller="index";
+    protected $action="viewAll";
     protected $params=[];
 
     function __construct(){
@@ -32,8 +32,10 @@ class app{
     }
 
     function UrlProcess(){
-        if( isset($_GET["url"]) ){
+        if( isset($_GET["url"])){
             return explode("/", filter_var(trim($_GET["url"], "/")));
+        }else{
+            $_GET["url"] = 'index/viewAll';
         }
     }
 }
