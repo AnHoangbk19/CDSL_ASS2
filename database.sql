@@ -206,8 +206,9 @@ ADD FOREIGN KEY (Username) REFERENCES ACCOUNT (Username);
 ALTER TABLE BUY_DIRECTLY
 ADD FOREIGN KEY (ONumber) REFERENCES FOOD_ORDER (Number),
 ADD FOREIGN KEY (CustomerID) REFERENCES CUSTOMER (ID);
-
-
+-- Phần chỉnh sửa Tân
+ALTER TABLE DISH
+ADD Image_Link Text;
 -- An Value
 INSERT INTO EMPLOYEE VALUE('100000001','Tran Van B','abc1@gmail.com','0903334441','2001-01-02','Nam','104 Thu Duc,TP Ho Chi Minh',6000000,'hoaibaoTV4',1);
 INSERT INTO EMPLOYEE VALUE('100000002','Tran Thi C','abc2@gmail.com','0903334442','2001-01-02','Nu','105 Thu Duc,TP Ho Chi Minh',6000000,'hoaibaoTV4-1',1);
@@ -319,20 +320,9 @@ INSERT INTO `dependent` (`Emp_ID`, `Dependent_name`, `Bdate`, `Address`, `Sex`, 
 INSERT INTO PROCESSES VALUE(4,'100000003');
 INSERT INTO PROCESSES VALUE(5,'200000003');
 
-INSERT INTO `includes` (`Onum`, `Dname`, `Ord_quantity`, `Listed_price`) VALUES
-(1, 'Ca hoi phi le', 2, 300000),
-(1, 'Suon Heo sot chanh day', 1, 210000),
-(2, 'Pho cuon Ha Noi', 3, 240000),
-(3, 'Pho cuon Ha Noi', 2, 160000),
-(4, 'Ca hoi phi le', 1,150000),
-(4, 'Suon Heo sot chanh day', 2, 420000),
-(5,'Pho cuon Ha Noi', 2, 160000);
 
 -- Hoai Bao value
 
-INSERT INTO DISH VALUES ('Ca hoi phi le', 150000);
-INSERT INTO DISH VALUES ('Suon Heo sot chanh day', 210000);
-INSERT INTO DISH VALUES ('Pho cuon Ha Noi', 80000);
 
 INSERT INTO BUY_ONLINE VALUES (1, 'minhbaoTV1');
 INSERT INTO BUY_ONLINE VALUES (3, 'ngoctanTV2');
@@ -361,12 +351,50 @@ INSERT INTO BRANCH VALUES (2, 'PCT', '411 Phan Chu Trinh', '090789002', '2000000
 INSERT INTO BRANCH VALUES (3, 'PCT', '41 Hoang Dieu', '090711111', '100000001',0);
 INSERT INTO BRANCH VALUES (4, 'PCT', '11 Vo Thi Sau', '090722222', '100000002',0);
 
-INSERT INTO HAS_FOOD VALUES ('Ca hoi phi le', 1,10);
-INSERT INTO HAS_FOOD VALUES ('Suon Heo sot chanh day', 1,10);
-INSERT INTO HAS_FOOD VALUES ('Pho cuon Ha Noi', 1,10);
-INSERT INTO HAS_FOOD VALUES ('Ca hoi phi le', 2,12);
-INSERT INTO HAS_FOOD VALUES ('Suon Heo sot chanh day', 2,12);
-INSERT INTO HAS_FOOD VALUES ('Pho cuon Ha Noi', 2,12);
+-- 
+-- INSERT DISH
+INSERT INTO DISH VALUES ("Cháo Ếch Singapore", 45000, "https://images.foody.vn/res/g108/1072266/prof/s640x400/foody-upload-api-foody-mobile-bia-210406100724.jpg");
+INSERT INTO DISH VALUES ("Chân Gà Ngâm Sả Tắc", 70000, "https://images.foody.vn/res/g106/1052099/prof/s640x400/foody-upload-api-foody-mobile-chan-ga-sa-tac-500-201021160112.jpg");
+INSERT INTO DISH VALUES ("Bánh Tráng Mỡ Hành Tóp Mỡ", 25000, "https://images.foody.vn/res/g97/960254/prof/s640x400/file_restaurant_photo_0pr0_16348-af99b606-211022145721.jpg");
+INSERT INTO DISH VALUES ("Hủ Tiếu Nam Vang", 35000, "https://images.foody.vn/res/g70/699162/prof/s640x400/foody-upload-api-foody-mobile-foody-upload-api-foo-200728152955.jpg");
+INSERT INTO DISH VALUES ("Bún Chả Lá Lốt", 30000, "https://images.foody.vn/res/g106/1050668/prof/s640x400/foody-upload-api-foody-mobile-36-201012145559.jpg");
+INSERT INTO DISH VALUES ("Bánh Mì Hà Nội", 25000, "https://images.foody.vn/res/g109/1082517/prof/s640x400/foody-upload-api-foody-mobile-cv-2bbb053f-210614103407.jpeg");
+INSERT INTO DISH VALUES ("Hamburger Bò Teriyaki", 40000, "https://images.foody.vn/res/g109/1081665/prof/s640x400/foody-upload-api-foody-mobile-ha-e5acab07-210607120946.jpeg");
+INSERT INTO DISH VALUES ("Cơm Chiên Dương Châu", 32000, "https://images.foody.vn/res/g97/966840/prof/s640x400/image-be32b319-200910114138.jpeg");
+INSERT INTO DISH VALUES ("Mì Trộn Muối Ớt", 37000, "https://images.foody.vn/res/g107/1060971/prof/s640x400/file_restaurant_photo_zc3t_16099-7f8de683-210106212421.jpg");
+INSERT INTO DISH VALUES ("Gà Sốt Sệt", 180000, "https://images.foody.vn/res/g106/1053558/prof/s640x400/file_restaurant_photo_ioed_16213-6877b5bd-210518123042.jpeg");
+-- INSERT HAS_FOOD
+INSERT INTO HAS_FOOD VALUES ("Cháo Ếch Singapore", 1, 30);
+INSERT INTO HAS_FOOD VALUES ("Bánh Tráng Mỡ Hành Tóp Mỡ", 1, 50);
+INSERT INTO HAS_FOOD VALUES ("Hủ Tiếu Nam Vang", 1, 35);
+INSERT INTO HAS_FOOD VALUES ("Bún Chả Lá Lốt", 1, 37);
+INSERT INTO HAS_FOOD VALUES ("Bánh Mì Hà Nội", 1, 60);
+INSERT INTO HAS_FOOD VALUES ("Hamburger Bò Teriyaki", 1, 25);
+INSERT INTO HAS_FOOD VALUES ("Gà Sốt Sệt", 1, 22);
+
+INSERT INTO HAS_FOOD VALUES ("Chân Gà Ngâm Sả Tắc", 2, 45);
+INSERT INTO HAS_FOOD VALUES ("Bánh Tráng Mỡ Hành Tóp Mỡ", 2, 30);
+INSERT INTO HAS_FOOD VALUES ("Hủ Tiếu Nam Vang", 2, 20);
+INSERT INTO HAS_FOOD VALUES ("Bún Chả Lá Lốt", 2, 28);
+INSERT INTO HAS_FOOD VALUES ("Cơm Chiên Dương Châu", 2, 17);
+INSERT INTO HAS_FOOD VALUES ("Mì Trộn Muối Ớt", 2, 33);
+
+INSERT INTO HAS_FOOD VALUES ("Cháo Ếch Singapore", 3, 18);
+INSERT INTO HAS_FOOD VALUES ("Chân Gà Ngâm Sả Tắc", 3, 27);
+INSERT INTO HAS_FOOD VALUES ("Hủ Tiếu Nam Vang", 3, 31);
+INSERT INTO HAS_FOOD VALUES ("Bún Chả Lá Lốt", 3, 25);
+INSERT INTO HAS_FOOD VALUES ("Bánh Mì Hà Nội", 3, 39);
+INSERT INTO HAS_FOOD VALUES ("Mì Trộn Muối Ớt", 3, 42);
+INSERT INTO HAS_FOOD VALUES ("Gà Sốt Sệt", 3, 7);
+
+INSERT INTO HAS_FOOD VALUES ("Cháo Ếch Singapore", 4, 23);
+INSERT INTO HAS_FOOD VALUES ("Chân Gà Ngâm Sả Tắc", 4, 35);
+INSERT INTO HAS_FOOD VALUES ("Bánh Tráng Mỡ Hành Tóp Mỡ", 4, 46);
+INSERT INTO HAS_FOOD VALUES ("Bánh Mì Hà Nội", 4, 36);
+INSERT INTO HAS_FOOD VALUES ("Cơm Chiên Dương Châu", 4, 21);
+INSERT INTO HAS_FOOD VALUES ("Mì Trộn Muối Ớt", 4, 29);
+
+
 
 
 
