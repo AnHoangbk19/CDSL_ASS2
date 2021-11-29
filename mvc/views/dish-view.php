@@ -1,4 +1,4 @@
-<!-- product-view.php sẽ render ra phần lõi nội dung, frontend sẽ sửa thêm phần này -->
+
 
 <?php
 
@@ -13,30 +13,9 @@ class DishView{
 
     public function showAllDishes_adminpage($dishes){
         $output = "";
-        /*$output .= '<h1 class="admin-view-product">Dish Table <i class="far fa-eye"></i></h1>
-                      <table>
-                        <tr>
-                          <th>NAME</th>
-                          <th>PRICE</th>
-                          <th>OPERATION</th>
-                        </tr>';
-        foreach ($dishes as $dish):
-            $output .= '<tr>
-                          <td class="admin-product-ID">' . $dish['Name'] . '</td>
-                          <td class="admin-product-price">'. $dish['Price'] .'</td>
-                          <td>
-                                  <form method="post" class="admin-product-btn-group"> 
-                                      <button name="updateDish" type="submit" value="' . $dish['Name'] . '">UPDATE</button>
-                                      <button name="deleteDish" type="submit" value="' . $dish['Name'] . '">DELETE</button>
-                                  </form>
-                                </td>
-                        </tr>';
-        endforeach;
-        $output .=    '</table>';*/
-
         $item = 1;
         $output .= '<div class="row top-content">
-        <h1 class="admin-view-product col-4">Dishes <i class="far fa-eye"></i></h1>
+        <h1 class="admin-view-product col-4">Dishes <i class="material-icons spoon">restaurant</i></h1>
 
         <div class="organic-filter-search col-8 d-flex">
             <h2 class="organic-filter-search_heading text-left">Search Dish</h2>
@@ -144,8 +123,29 @@ class DishView{
         return $output;
     }
 
+
+
+    public function showInvalidInsert($err){
+      if ($err == 0)
+        $output = '<div class="alert-filter row">
+        <p>This Name of DISH already exists. Please try again!</p>
+        </div>';
+      
+        if ($err == 1)
+        $output = '<div class="alert-filter row">
+        <p>You must enter Name of DISH!</p>
+        </div>';   
+        
+        if ($err == 2)
+        $output = '<div class="alert-filter row">
+        <p>You must enter Price of DISH!</p>
+        </div>';    
+  
+      return $output;
+    }    
+
+
     public function showFormFilter(){
-      $check = true;
       $output = "";
       $output .= '<h1 class="admin-add-product">Dish Price Filter <i class="fas fa-filter"></i></h1>
                     <form method="post" action="" class="add-product-form">
@@ -185,7 +185,7 @@ class DishView{
                         <td class="admin-product-img">
                           <img src="' . $dish['Image_Link'] . '" alt="Dish Image">
                         </td>
-                        <td class="admin-product-price">'. $dish['Dish_Name'] .'</td>
+                        <td class="admin-product-name">'. $dish['Dish_Name'] .'</td>
                         <td class="admin-product-price">'. (int)$dish['Price']/1000 . '.000đ</td>
 
                       </tr>';
@@ -224,7 +224,7 @@ class DishView{
 
                   <div class="add-product-info row">
                     <label for="add-product-price" class="col-4">TOTAL QUANTITY</label>
-                    <input id="add-product-price" class="col-8" name="Total_Qty" type="number" step="any" min="0">
+                    <input id="add-product-price" class="col-8" name="Total_Qty" type="number" step="1" min="0">
                   </div>
 
                   <div class="add-product-info row">
@@ -236,9 +236,13 @@ class DishView{
 
   public function showDishesAvailable($dishes){
     $output = "";
-    $output .= '<h1 class="admin-view-product">Result <i class="far fa-eye"></i></h1>
+    $output .= '<h1 class="admin-view-product">Result <span>(' . count($dishes);
+    if (count($dishes) == 0 || count($dishes) == 1) $output .= ' record';
+    else $output .= ' records';
+    $output .= ')</span></h1>
                   <table>
                     <tr>
+                      <th>DISH IMAGE</th>
                       <th>DISH NAME</th>
                       <th>PRICE</th>
                       <th>NO. OF BRANCHES</th>
@@ -246,7 +250,10 @@ class DishView{
                     </tr>';
     foreach ($dishes as $dish):
         $output .= '<tr>
-                      <td class="admin-product-price">'. $dish['Dish_Name'] .'</td>
+                      <td class="admin-product-img">
+                        <img src="' . $dish['Image_Link'] . '" alt="Dish Image">
+                      </td>
+                      <td class="admin-product-name">'. $dish['Dish_Name'] .'</td>
                       <td class="admin-product-price">'. (int)$dish['Price']/1000 . '.000đ</td>
                       <td class="admin-product-price">'. $dish['Num_of_Branches'] .'</td>
                       <td class="admin-product-price">'. $dish['Total_Quantity'] .'</td>                      
@@ -254,69 +261,27 @@ class DishView{
     endforeach;
     $output .=    '</table>';
     return $output;
-}    
+  }    
 
+  public function showInvalidAvailable($err){
+    
+      if ($err == 1)
+      $output = '<div class="alert-filter row">
+      <p>You must enter Total Quantity!</p>
+      </div>';    
 
+    return $output;
+  }    
 
-    public function deleteDish($result) {
-      $output = "";
-      if ($result == true)
-      {
-          $output .= '<script>
-          var txt;
-          txt = "You pressed Cancel!";
-          document.getElementById("mess").innerHTML = txt;
-                      </script>';
-      }
-      else
-      {
-        echo '<div class="mess">Faild!</div>';
-      }
-      return $output;
-    }
-
-
-
-
-    public function confirmPopUp($mess, $Name){
+    public function deleteDish() {
       echo '<script>
-      var result = confirm("' . $mess . '");
-      var url = window.location.href;  
-      if (result){
-          url = "dish.php?ctrl=dish&confirm=true&deleteDish='.$Name.'";
-          location.href = url;
-      }
-      else{
-          url = "dish.php?ctrl=dish&confirm=false&deleteDish='.$Name.'";
-          location.href = url;
-      }
+      alert("Failed to delete this dish!"); 
       </script>';
     }
 
 
 
 
-
-    public function alertResultPopUp($ctrl, $result) {
-        $output = "";
-        if ($result == true)
-        {
-            $output .= '<script>
-                          var result = confirm("Successfully");
-                          if (result)
-                              location.href = "dish.php?ctrl='. $ctrl .'";
-                          else
-                              location.href = "dish.php?ctrl='. $ctrl .'";
-                        </script>';
-        }
-        else
-        {
-            $output .= '<script>
-                          alert("Failed");
-                        </script>';
-        }
-        return $output;
-    }
 }
 
 ?>

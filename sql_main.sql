@@ -697,7 +697,6 @@ BEGIN
 	SELECT COUNT(Name) INTO C
 	FROM DISH
 	WHERE Name = new_Name;
-
 	IF C != 0 THEN 
 		SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = "This Name of DISH already exists. Please try again!";
@@ -720,7 +719,7 @@ BEFORE INSERT
 ON HAS_FOOD
 FOR EACH ROW
 BEGIN
-	IF NEW.Available_quantity > 100 THEN
+	IF NEW.Available_Quantity > 100 THEN
 		BEGIN
 			SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Available quantity can not exceed 100!";
         END;
@@ -736,11 +735,11 @@ AFTER INSERT
 ON HAS_FOOD
 FOR EACH ROW
 BEGIN
-    IF (SELECT COUNT(Number) FROM HAS_FOOD WHERE Dish_name = NEW.Dish_name) > 3 THEN
+    IF (SELECT COUNT(Number) FROM HAS_FOOD WHERE Dish_Name = NEW.Dish_Name) > 3 THEN
 		BEGIN
 			UPDATE DISH
 			SET Price = Price - 3000
-			WHERE Name = NEW.Dish_name;
+			WHERE Name = NEW.Dish_Name;
         END;
 	END IF;
 END; $$
@@ -752,7 +751,7 @@ DELIMITER ;
 --
 
 -- CÂU 3
-DROP PROCEDURE IF EXISTS Dish_Price_Filter $$
+DROP PROCEDURE IF EXISTS Dish_Price_Filter;
 DELIMITER $$
 CREATE PROCEDURE Dish_Price_Filter(
 	Compared_Price DECIMAL(10,2),
@@ -764,7 +763,7 @@ BEGIN
 	ELSE
 		SELECT H.Number AS Branch_Num, D.Image_Link AS Image_Link, H.Dish_name AS Dish_Name, D.Price AS Price
         FROM DISH AS D, HAS_FOOD AS H
-        WHERE H.Dish_name = D.Name AND D.Price <= Compared_Price AND H.number = Branch_Num
+        WHERE H.Dish_Name = D.Name AND D.Price <= Compared_Price AND H.number = Branch_Num
         ORDER BY Price;
 	END IF;	
 END; $$
@@ -790,15 +789,13 @@ DELIMITER ;
 --
 
 -- CÂU 4
-DROP FUNCTION IF EXISTS Price_level;
+DROP FUNCTION IF EXISTS Price_Level;
 DELIMITER $$
-
 CREATE FUNCTION Price_Level(Price DECIMAL(10,2)) 
 RETURNS VARCHAR(12)
 DETERMINISTIC
 BEGIN
     DECLARE Price_Level VARCHAR(12);
-
     IF Price < 30000 THEN
 		SET Price_Level = 'Thấp';
     ELSEIF (Price >= 30000 AND Price <= 50000) THEN
@@ -806,16 +803,17 @@ BEGIN
     ELSEIF Price > 50000 THEN
         SET Price_Level = 'Cao';
     END IF;
-
 	RETURN (Price_Level);
 END $$
 DELIMITER ;
+SELECT Name, Price, Price_Level(Price) AS Price_Level
+FROM DISH
+ORDER BY Price;
 
 
 --
 DROP FUNCTION IF EXISTS Unique_Dish;
 DELIMITER $$
-
 CREATE FUNCTION Unique_Dish(Dish VARCHAR(255)) 
 RETURNS VARCHAR(8)
 DETERMINISTIC
@@ -825,11 +823,9 @@ BEGIN
     SELECT COUNT(Dish_Name) INTO Num_of_Branches
     FROM HAS_FOOD
     WHERE Dish_Name = Dish;
-
     IF Num_of_Branches = 1 THEN
 		SET is_Unique = 'Đặc biệt';
     END IF;
-
 	RETURN (is_Unique);
 END $$
 DELIMITER ;
