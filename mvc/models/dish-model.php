@@ -33,7 +33,6 @@ class DishModel {
     }
 
     public function Edit($action, $dish){
-
         if ($action == "insert")
         {
             $conn = $this->InitConnect();

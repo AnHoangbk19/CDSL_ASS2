@@ -1,6 +1,6 @@
 <?php
     require_once "./mvc/core/basehref.php";
-    class RestaurantModel extends db{
+    class CustomerModel extends db{
         private function _query($sql)
         {
             return mysqli_query($this->connect, $sql);

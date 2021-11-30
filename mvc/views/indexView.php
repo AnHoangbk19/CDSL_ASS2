@@ -17,14 +17,13 @@ $home_url = getUrl().'/';
 </head>
 <body>
     <div class="container">
-        <div class="list-group"><h1>Thành Viên Nhóm</h1>
+        <div class="list-group mt-4"><h1>DB-BTL: Thành Viên Nhóm</h1>
 
         
-        <a href="manage/viewBranchAll" class="list-group-item list-group-item-action list-group-item-primary">Nguyễn Minh Bảo</a>
-        <a href="dish.php" class="list-group-item list-group-item-action list-group-item-secondary">Phạm Ngọc Tân</a>
+        <a href="manage/viewBranchAll" class="mt-4 list-group-item list-group-item-action list-group-item-primary">Nguyễn Minh Bảo</a>
+        <a href="dish.php" class="list-group-item list-group-item-action list-group-item-warning">Phạm Ngọc Tân</a>
         <a href="home/viewEmployeeAll" class="list-group-item list-group-item-action list-group-item-success">Phạm Đại Hoàng An</a>
-        <a href="/" class="list-group-item list-group-item-action list-group-item-danger">#</a>
-        <a href="/" class="list-group-item list-group-item-action list-group-item-warning">#</a>
+        <a href="cus/viewCustomerAll" class="list-group-item list-group-item-action list-group-item-danger">Nguyễn Phước Toàn</a>
         <a href="/" class="list-group-item list-group-item-action list-group-item-info">#</a>
         </div>
     </div>

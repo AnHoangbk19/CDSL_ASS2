@@ -72,7 +72,7 @@ $home_url = getUrl().'/';
 
                 <div class="admin_detail">
                     <div class="admin_detail_title">
-                        Quản lý Branch
+                        Quản lý khách hàng
                     </div>
                     <div class="admin_detail_content">
                         <table class="table">
@@ -106,8 +106,8 @@ $home_url = getUrl().'/';
                         </table>
                         <div class="show_quantity">
                             <div class="show_quantity_item">
-                                <button type="button" id="button_add" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">ADD BRANCH</button>
-                                <a href="manage/viewBranchAll" class="btn btn-primary" >SHOW ALL</a>
+                                <button type="button" id="button_add" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">ADD CUSTOMER</button>
+                                <!-- <a href="manage/viewBranchAll" class="btn btn-primary" >SHOW ALL</a> -->
                             </div>
                             <div class="show_quantity_page">
                                 <!-- <nav aria-label="...">
