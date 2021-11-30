@@ -49,7 +49,7 @@
             return $types;
         } 
         public function getviewCustomer($Name){
-            $typesql = "CALL EoB('".$Name."');";
+            $typesql = "select * from CUSTOMER where Name like '%$Name%'";
             $query1 = $this->_query($typesql);
             if(!$query1) return [];
             $types = [];
