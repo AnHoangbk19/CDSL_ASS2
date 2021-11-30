@@ -49,7 +49,7 @@
             return $types;
         } 
         public function getviewEmployee($Name){
-            $typesql = "CALL Employee_of_branch('".$Name."');";
+            $typesql = "CALL EoB('".$Name."');";
             $query1 = $this->_query($typesql);
             if(!$query1) return [];
             $types = [];
