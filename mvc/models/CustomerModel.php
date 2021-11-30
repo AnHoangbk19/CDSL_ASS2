@@ -20,7 +20,7 @@
             if($id != -1){
                 $typesql1 = "UPDATE Customer
                 SET Name = '".$Name."', Phone = '".$Phone."', Bdate = '".$Accumulated_point."
-                WHERE ID = ".$ID_Employee.";";
+                WHERE ID = ".$ID_Customer.";";
                 if (!$this->_query($typesql1)) {
                     return "<script>
                         alert(\"Error: ".mysqli_error($this->connect)."\");
@@ -28,7 +28,7 @@
                     </script>";
                 }
             }else{
-                $typesql1 = "CALL addCustomer('".$ID_Customer."', '".$Name."', '".$Phone."', '".$Accumulated_point.");";
+                $typesql1 = "CALL addCustomer('".$ID_Customer."', '".$Name."', '".$Phone."', ".$Accumulated_point.");";
                 if (!$this->_query($typesql1)) {
                     return "<script>
                         alert(\"Error: ".mysqli_error($this->connect)."\");

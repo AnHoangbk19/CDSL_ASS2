@@ -10,11 +10,10 @@
         }
         public function editCustomer($id){
             $ID_Customer = $_POST['ID_Customer'];
-            $Name = $_POST['Name'];
-            $Phone = $_POST['Phone'];
-            $Point = $_POST['Accumulated_point'];
-            
-            $demoData = $this->model('CustomerModel')->editCustomer($id, $ID_Customer,$Name,$Phone,$Accumulated_point);
+            $Name = $_POST['Name_Customer'];
+            $Phone = $_POST['Phone_Customer'];
+            $Point = $_POST['Point_Customer'];
+            $demoData = $this->model('CustomerModel')->editCustomer($id, $ID_Customer,$Name,$Phone,$Point);
             if($demoData != "") echo $demoData;
             else header("Location: " . geturl(). "/cus/viewCustomerAll");
         }
