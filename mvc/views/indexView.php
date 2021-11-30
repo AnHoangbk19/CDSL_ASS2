@@ -24,7 +24,7 @@ $home_url = getUrl().'/';
         <a href="dish.php" class="list-group-item list-group-item-action list-group-item-warning">Phạm Ngọc Tân</a>
         <a href="home/viewEmployeeAll" class="list-group-item list-group-item-action list-group-item-success">Phạm Đại Hoàng An</a>
         <a href="cus/viewCustomerAll" class="list-group-item list-group-item-action list-group-item-danger">Nguyễn Phước Toàn</a>
-        <a href="/" class="list-group-item list-group-item-action list-group-item-info">#</a>
+        <a href="order/viewBranchAll" class="list-group-item list-group-item-action list-group-item-info">Lê Hồ Hoài Bão</a>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
