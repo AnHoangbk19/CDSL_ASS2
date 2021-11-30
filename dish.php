@@ -63,10 +63,6 @@
 
         <nav class="navbar navbar-expand admin-nav">
 
-            <div class="admin-logo">
-                <a href="#"><i class='far fa-arrow-alt-circle-left'></i> Back To Home</a>
-            </div>        
-
             <ul class="navbar-nav admin-manage-list">
 
                 <li class="admin-manage-item nav-item dropdown">
@@ -74,14 +70,7 @@
                         data-bs-toggle="dropdown">Dish Table</a>
                     <ul class="admin-manage-item_list dropdown-menu">
                         <li><a href="dish.php?ctrl=dish">Show Dish</a></li>
-                    </ul>
-                </li>            
-
-                <li class="admin-manage-item nav-item dropdown">
-                    <a class="admin-manage-item_btn nav-link dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown">Insert Dish</a>
-                    <ul class="admin-manage-item_list dropdown-menu">
-                        <li><a href="dish.php?ctrl=dish&act=insert">Call Procedure</a></li>
+                        <li><a href="dish.php?ctrl=dish&act=insert">Insert Dish</a></li>
                     </ul>
                 </li>
 

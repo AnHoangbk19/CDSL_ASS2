@@ -36,13 +36,9 @@ h6 {
     background-color: #1e271e;
 }
 
-.admin-logo a {
+.admin-logo img {
+    width: 80%;
     margin-left: 20px;
-    color: white;
-}
-
-.admin-logo a:hover {
-    color: #ff7e00 !important;
 }
 
 .admin-manage-list {
@@ -77,7 +73,7 @@ h6 {
     background-color: white;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
-    margin-top: 12px !important;
+    margin-top: 18px !important;
     text-align: left;
     border-radius: 4px !important;
     width: 100%;
@@ -684,9 +680,4 @@ input[type="text"]:focus {
     vertical-align: text-bottom;
     font-size: 1.5em;
     margin: auto;
-}
-
-.spoon {
-    font-size: 2.7rem !important;
-    vertical-align: baseline;
 }
