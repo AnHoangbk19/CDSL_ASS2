@@ -131,6 +131,9 @@
                     }
                     $result = false;
                 }
+                if (sizeof($arr) != 0) {
+                    $result = $DishModel->Edit($action, $arr);
+                }
             }
             return $output;
         }
