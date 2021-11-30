@@ -828,6 +828,166 @@ BEGIN
 END $$
 DELIMITER ;
 
+
+-- Phước Toàn PRIVATE
+-- CÂU 1
+DROP PROCEDURE IF EXISTS addCustomer
+DELIMITER $$
+CREATE PROCEDURE addCustomer(ID_c CHAR(9), 
+							Name_c VARCHAR(255), 
+							Phone_c CHAR(10), 
+							Accumulated_point_c INT)
+BEGIN
+	DECLARE id CHAR(9);
+    SELECT COUNT(ID) INTO id FROM CUSTOMER WHERE ID = ID_c;
+    IF(id is null) THEN
+		BEGIN
+			SIGNAL SQLSTATE '45000' 
+            SET MESSAGE_TEXT = "Duplicate ID customer";
+		END;
+	ELSE INSERT INTO CUSTOMER VALUES (ID_c, Name_c, phone_c, Accumulated_point_c);
+    END IF;
+END$$
+DELIMITER ;
+
+-- CÂU2
+--
+DROP TRIGGER IF EXISTS check_account 
+DELIMITER $$
+CREATE Trigger check_account 
+AFTER INSERT ON CUSTOMER
+FOR EACH ROW
+BEGIN
+	IF(NEW.ID IN (SELECT Customer_ID FROM HAS_ACC WHERE Customer_ID = NEW.ID)) THEN
+		BEGIN
+			SIGNAL SQLSTATE '45000' 
+			SET MESSAGE_TEXT = "Already have an account";
+		END;
+	END IF;
+END$$
+DELIMITER ;
+--
+
+--
+DROP TRIGGER IF EXISTS update_point
+DELIMITER $$
+CREATE Trigger update_point AFTER INSERT ON CUSTOMER
+FOR EACH ROW
+BEGIN
+	If(NEW.ID IN (SELECT Customer_ID FROM HAS_ACC WHERE Customer_ID = NEW.ID)) THEN
+		BEGIN
+			UPDATE CUSTOMER
+            SET Accumulated_point = Accumulated_point + 10
+			WHERE ID = NEW.ID;
+		END;
+	END IF;
+End$$
+DELIMITER ;
+--
+
+-- CÂU 3
+--
+DROP PROCEDURE IF EXISTS HasAccount_of_Customer
+DELIMITER $$
+CREATE PROCEDURE HasAccount_of_Customer (
+	IN Num INT
+)
+BEGIN
+	SELECT Customer_ID, Username
+	FROM HAS_ACC
+	JOIN CUSTOMER ON HAS_ACC.Customer_ID = CUSTOMER.ID
+	WHERE CUSTOMER.Accumulated_point = Num
+	ORDER BY ID;
+END$$
+DELIMITER ;
+--
+
+--
+DROP PROCEDURE IF EXISTS Point_of_Customer
+DELIMITER $$
+CREATE PROCEDURE Point_of_Customer (
+	IN Num INT
+)
+BEGIN
+	SELECT Customer_ID, Username
+	FROM CUSTOMER
+	JOIN (SELECT Accumulated_point, COUNT(*) AS count
+		  FROM CUSTOMER 
+		  JOIN HAS_ACC ON HAS_ACC.Customer_ID = CUSTOMER.ID
+		  HAVING COUNT(*) >= Num) AS table_count
+	ON CUSTOMER.ID = table_count.ID
+	ORDER BY CUSTOMER.ID;
+END$$
+DELIMITER ;
+--
+
+-- CÂU 4
+--
+DROP FUNCTION IF EXISTS Count_point
+DELIMITER $$
+CREATE FUNCTION Count_point(
+	Num INT
+)
+RETURNS INT
+DETERMINISTIC 
+BEGIN
+	IF(NOT EXISTS (SELECT * FROM CUSTOMER WHERE Accumulated_point = Num)) THEN
+		BEGIN
+			SIGNAL SQLSTATE '45000' 
+			SET MESSAGE_TEXT = "Can't find point";
+		END;
+	ELSE RETURN(
+		SELECT COUNT(*)
+		FROM CUSTOMER
+		JOIN HAS_ACC ON CUSTOMER.ID = HAS_ACC.Customer_ID WHERE CUSTOMER.Accumulated_point = Num
+	);
+	END IF;
+END$$
+DELIMITER ;
+--
+
+--
+DROP FUNCTION IF EXISTS percent_point
+DELIMITER $$
+CREATE FUNCTION percent_point(
+	Num INT
+)
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+	IF(EXISTS (SELECT Customer_ID FROM HAS_ACC JOIN CUSTOMER ON HAS_ACC.Customer_ID = CUSTOMER.ID)) THEN
+		BEGIN
+			IF(NOT EXISTS (SELECT * FROM CUSTOMER WHERE Accumulated_point = Num)) THEN
+				BEGIN
+					SIGNAL SQLSTATE '45000' 
+					SET MESSAGE_TEXT = "Can't find point";
+				END;
+			ELSE 
+				BEGIN
+					DECLARE point_num DECIMAL(10,2);
+					DECLARE total DECIMAL(10,2);
+					SET point_num = (SELECT COUNT(*)
+									FROM CUSTOMER
+									JOIN HAS_ACC ON CUSTOMER.ID = HAS_ACC.Customer_ID AND Accumulated_point = Num
+									);
+					SET total= (SELECT COUNT(*)
+								FROM CUSTOMER 
+								JOIN HAS_ACC ON CUSTOMER.ID = HAS_ACC.Customer_ID
+								);
+					RETURN (point_num / total) * 100;
+				END;
+			END IF;
+		END;
+	ELSE
+		BEGIN
+			SIGNAL SQLSTATE '45000' 
+			SET MESSAGE_TEXT = "No account";
+		END;
+	END IF;
+END$$
+DELIMITER ;
+--
+
 INSERT INTO MANAGER VALUES ('200000005');
 INSERT INTO MANAGER VALUES ('100000005');
 INSERT INTO MANAGER VALUES ('100000001');
@@ -949,6 +1109,12 @@ INSERT INTO `dependent` (`Emp_ID`, `Dependent_name`, `Bdate`, `Address`, `Sex`, 
 ('200000004', 'Đỗ Văn Tân', '1965-03-15', 'TP. Thủ Đức, TP. HCM', 'Nam', 'Cha', '0768936471'),
 ('200000005', 'Hồ Minh Tâm', '1990-06-12', 'Quận 2, TP.HCM', 'Nam', 'Chồng', '0436287407');
 
+INSERT INTO CUSTOMER VALUES ('000000001', 'Le Van A', '0907894562', 0);
+INSERT INTO CUSTOMER VALUES ('000000002', 'Nguyen Van B', '0907894563', 5);
+INSERT INTO CUSTOMER VALUES ('000000003', 'Pham Thi C', '0907894564', 0);
+INSERT INTO CUSTOMER VALUES ('000000004', 'Tran Duc D', '0907894565', 0);
+INSERT INTO CUSTOMER VALUES ('000000005', 'To Hien E', '0907894566', 15);
+
 INSERT INTO ACCOUNT
 VALUE ('minhbaoTV1', 20052001, 'minhbao@gmail.com','customer');
 INSERT INTO ACCOUNT
@@ -1004,11 +1170,6 @@ VALUE ('200000001', 2, null);
 INSERT INTO COOK
 VALUE ('200000004', 1, '200000001');
 
-INSERT INTO CUSTOMER VALUES ('000000001', 'Le Van A', '0907894562', 0);
-INSERT INTO CUSTOMER VALUES ('000000002', 'Nguyen Van B', '0907894563', 5);
-INSERT INTO CUSTOMER VALUES ('000000003', 'Pham Thi C', '0907894564', 0);
-INSERT INTO CUSTOMER VALUES ('000000004', 'Tran Duc D', '0907894565', 0);
-INSERT INTO CUSTOMER VALUES ('000000005', 'To Hien E', '0907894566', 15);
 
 CREATE INDEX indexDishNam
 ON dish (name);

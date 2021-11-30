@@ -33,7 +33,7 @@ $home_url = getUrl().'/';
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto fontSize">
                     <li class="nav-item active mr-4 selectedMenu">
-                        <a class="nav-link" href="./home">Back To Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index">Back To Home<span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
             </div>
@@ -236,7 +236,7 @@ $home_url = getUrl().'/';
         getEditRow.forEach(ele => {
             ele.addEventListener('click', () => {
                 var form_delete = document.getElementById('form_delete');
-                form_delete.action = `manage/deleteBranch/${ID}`;
+                form_delete.action = `cus/deleteCustomer/${ID}`;s
                 form_delete.submit();
             })
         })
@@ -266,8 +266,8 @@ $home_url = getUrl().'/';
         })
         document.getElementById('button_form_event').addEventListener('click', () => {
             var form_event = document.getElementById('form_event');
-            if(arr_value) form_event.action = `manage/editBranch/${arr_value[0]}`;
-            else form_event.action = `manage/editBranch/-1`
+            if(arr_value) form_event.action = `cus/editCustomer/${arr_value[0]}`;
+            else form_event.action = `cus/editCustomer/-1`
             if(document.getElementById('Name_Customer').value&&document.getElementById('Phone_Customer')&&document.getElementById('Point_Customer').value)
                 form_event.submit();
         })
@@ -276,7 +276,7 @@ $home_url = getUrl().'/';
         document.getElementById('inputQuantitySubmit').addEventListener('click', () => {
             var input = document.querySelector('#inputQuantity input').value;
             if(input){
-                document.getElementById('inputQuantity').action = `manage/viewBranch/${input}`;
+                document.getElementById('inputQuantity').action = `cus/viewCustomer/${input}`;
                 document.getElementById('inputQuantity').submit();
             }else{
                 alert('Mời nhập số lượng')
@@ -286,7 +286,7 @@ $home_url = getUrl().'/';
         document.getElementById('inputNameSubmit').addEventListener('click', () => {
             var input = document.querySelector('#inputName input').value;
             if(input){
-                document.getElementById('inputName').action = `manage/viewBranchName/${input}`;
+                document.getElementById('inputName').action = `cus/viewCustomer/${input}`;
                 document.getElementById('inputName').submit();
             }else{
                 alert('Mời nhập tên')

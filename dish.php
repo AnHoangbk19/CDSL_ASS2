@@ -64,7 +64,7 @@
         <nav class="navbar navbar-expand admin-nav">
 
             <div class="admin-logo">
-                <a href="#"><i class='far fa-arrow-alt-circle-left'></i> Back To Home</a>
+                <a href="index"><i class='far fa-arrow-alt-circle-left'></i> Back To Home</a>
             </div>        
 
             <ul class="navbar-nav admin-manage-list">
